@@ -43,7 +43,8 @@ const Board: React.FC = () => {
           <Tile key={id} value={tile} onClick={() => handleClick(id)} highlight={winningCombination?.includes(id) || false} />
         ))}
       </div>
-      <button title="reset" type="reset" onClick={handleReset} className='w-40 h-11 text-xl bg-transparent shadow-inner shadow-fuchsia-500 text-white rounded-full hover:border-x-cyan-500 hover:border-4 hover:scale-125 hover:ease-linear'>Reset</button>
+      <button title="reset" type="reset" onClick={handleReset} className='w-40 h-11 text-xl bg-transparent shadow-inner shadow-fuchsia-500 
+          text-white rounded-full hover:border-x-cyan-500 hover:border-4 hover:scale-110 hover:ease-linear'>Reset</button>
     </div>
   )
 }
