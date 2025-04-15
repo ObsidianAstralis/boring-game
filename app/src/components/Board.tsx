@@ -38,7 +38,7 @@ const Board: React.FC = () => {
   return (
     <div className="flex flex-col items-center">
       <div className="text-4xl font-bold mb-6">{status}</div>
-      <div className="grid grid-cols-3 gap-1 p-2 mb-8 rounded-lg shadow-inner shadow-blue-500">
+      <div className="grid grid-cols-3 gap-2 p-2 mb-8">
         {tiles.map((tile, id) => (
           <Tile key={id} value={tile} onClick={() => handleClick(id)} highlight={winningCombination?.includes(id) || false} />
         ))}
