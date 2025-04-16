@@ -59,6 +59,9 @@ jobs:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
     needs: test
+    environment:
+      name: Production
+      url: https://obsidianastralis.github.io/boring-game/
 
     steps:
       - name: Checkout repository
@@ -84,4 +87,4 @@ jobs:
           publish_dir: ./app/dist
       
       - name: Show deployed site URL
-        run: https://obsidianastralis.github.io/boring-game/
+        run: echo "https://obsidianastralis.github.io/boring-game/"
