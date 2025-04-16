@@ -4,7 +4,7 @@ import { describe, it, expect } from "vitest";
 describe('checkWinner', () => {
   it('returns the winner for horizontal line', () => {
     const tiles = ['X', 'X', 'X', null, null, null, null, null, null];
-    expect(checkWinner(tiles)).toEqual({ winner: 'X', combination: [0, 1, 2] });
+    expect(checkWinner(tiles)).toEqual({ winner: 'X', combination: [0, 1, 3] });
   });
 
   it('returns the winner for diagonal line', () => {
