@@ -83,5 +83,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./app/dist
       
-      - name: Show deployed site URL
-        run: echo "✅ https://obsidianastralis.github.io/boring-game/"
+      
