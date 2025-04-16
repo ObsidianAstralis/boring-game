@@ -13,7 +13,7 @@ const Board: React.FC = () => {
 
     // Update the board
     const nextTiles = tiles.slice()
-    nextTiles[index] = xIsNext ? "X" : "O"
+    nextTiles[index] = xIsNext ? X : "O"
 
     setTiles(nextTiles)
     setXIsNext(!xIsNext)
