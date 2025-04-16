@@ -16,4 +16,10 @@ describe('checkWinner', () => {
     const tiles = ['X', 'O', 'X', 'O', 'X', 'O', 'O', 'X', 'O'];
     expect(checkWinner(tiles)).toBe(null);
   });
+
+  // Intentional FAIL
+  it('fails when expecting a wrong combination', () => {
+    const tiles = ['X', 'X', 'X', null, null, null, null, null, null];
+    expect(checkWinner(tiles)).toEqual({ winner: 'X', combination: [1, 2, 3] }); // wrong combination
+  });
 });
