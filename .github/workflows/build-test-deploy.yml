@@ -56,14 +56,8 @@ jobs:
         working-directory: ./app
 
       - name: Run unit tests with Vitest and save logs
-        run: npm run test > vitest-results.log
+        run: npm run test
         working-directory: ./app
-      
-      - name: Save test logs
-        uses: actions/upload-artifact@v4
-        with:
-          name: vitest logs
-          path: ./app/vitest-results.log
 
   deploy:
     name: 🚀 Deploy
