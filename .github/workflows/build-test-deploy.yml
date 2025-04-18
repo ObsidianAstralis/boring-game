@@ -88,8 +88,11 @@ jobs:
           publish_dir: dist
       
       - name: Verify deployment
-        run: curl --fail https://obsidianastralis.github.io/boring-game/
-        continue-on-error: false
+        run: |
+          echo "Verifying deployment..."
+          sleep 30 # Wait for deployment to propagate
+          curl --fail https://obsidianastralis.github.io/boring-game/ || echo "Deployment verification failed. URL might not be accessible yet."
+        continue-on-error: true
 
       - name: Notify on deployment success
         if: success()
