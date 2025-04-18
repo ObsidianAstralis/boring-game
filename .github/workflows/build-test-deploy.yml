@@ -89,7 +89,7 @@ jobs:
           name: dist-folder
       
       - name: Add .nojekyll file
-        run: echo "" > ./dist/.nojekyll
+        run: echo "" > .app/dist/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
