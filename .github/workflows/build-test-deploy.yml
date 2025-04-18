@@ -58,6 +58,17 @@ jobs:
         run: npm run test
         working-directory: ./app
 
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: vitest-report
+          path: ./app/test-results.xml
+
+      - name: Display summary
+        run: |
+          echo "### Test Summary" >> $GITHUB_STEP_SUMMARY
+          echo "\`Results saved in ./app/test-results.xml\`" >> $GITHUB_STEP_SUMMARY
+        
   deploy:
     name: 🚀 Deploy
     runs-on: ubuntu-latest
@@ -77,7 +88,19 @@ jobs:
           path: dist
 
       - name: Deploy to GitHub Pages
+        id: deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist
+
+      - name: Check Deployment Status
+        if: failure()
+        run: |
+          echo "🚨 Deployment failed! Check logs above."
+          echo "🔁 Manual rollback: Redeploy from previous commit using GitHub UI or CLI."
+
+      - name: Show deployed site URL
+        if: success()
+        run: echo "🔗 Deployed site -> https://obsidianastralis.github.io/boring-game/"
+        
