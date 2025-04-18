@@ -12,8 +12,13 @@ describe('checkWinner', () => {
     expect(checkWinner(tiles)).toEqual({ winner: 'O', combination: [0, 4, 8] });
   });
 
-  it('returns null when there is no winner', () => {
-    const tiles = ['X', 'O', 'X', 'O', 'X', 'O', 'O', 'X', 'O'];
+  it('returns null when the game is still in progress', () => {
+    const tiles = ['X', 'O', null, 'O', 'X', null, 'O', 'X', null];
     expect(checkWinner(tiles)).toBe(null);
+  });
+
+  it('returns "Tie" when the board is full with no winner', () => {
+    const tiles = ['X', 'O', 'X', 'X', 'O', 'O', 'O', 'X', 'X'];
+    expect(checkWinner(tiles)).toEqual({ winner: 'Tie', combination: [] });
   });
 });
