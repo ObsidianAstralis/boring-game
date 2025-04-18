@@ -18,6 +18,12 @@ const checkWinner = (tiles: (string | null)[]) => {
         }
     }
 
+    // Check for tie: no nulls and no winner
+    const isTie = tiles.every(tile => tile !== null);
+    if (isTie) {
+        return { winner: 'Tie', combination: [] };
+    }
+
     return null
 }
 
