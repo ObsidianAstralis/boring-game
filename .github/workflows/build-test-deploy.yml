@@ -52,9 +52,15 @@ jobs:
         run: npm ci
         working-directory: ./app
 
-      - name: Run unit tests with Vitest
-        run: npm run test
+      - name: Run unit tests with Vitest and save logs
+        run: npm run test > vitest-results.log
         working-directory: ./app
+      
+      - name: Save test logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: vitest logs
+          path: ./app/vitest-results.log
 
   deploy:
     name: 🚀 Deploy
@@ -77,3 +83,30 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: dist
+      
+      - name: Verify deployment
+        run: curl --fail https://obsidianastralis.github.io/boring-game/
+        continue-on-error: false
+
+      - name: Notify on deployment success
+        if: success()
+        run: echo "Deployment successful!"
+
+      - name: Notify on deployment failure
+        if: failure()
+        run: echo "Deployment failed. Please check the logs."
+
+  rollback:
+    name: ⏪ Rollback Deployment
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: failure()
+    steps:
+      - name: Checkout previous version
+        uses: actions/checkout@v3
+        with:
+          ref: previous-tag-or-commit
+
+      - name: Deploy previous version
+        run: npm run deploy
+        working-directory: ./app
